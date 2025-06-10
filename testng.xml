@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="DemoblazeTestSuite">
+    <test name="DemoblazeTests">
+        <classes>
+            <class name="com.demoblaze.tests.CartTests"/>
+            <class name="com.demoblaze.tests.LoginTests"/>
+            <class name="com.demoblaze.tests.OrderTests"/>
+        </classes>
+    </test>
+</suite>
