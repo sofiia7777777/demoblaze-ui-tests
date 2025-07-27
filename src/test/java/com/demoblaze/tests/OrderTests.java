@@ -3,6 +3,7 @@ package com.demoblaze.tests;
 import com.demoblaze.components.HeaderComponent;
 import com.demoblaze.modals.ConfirmationModal;
 import com.demoblaze.modals.PlaceOrderModal;
+import com.demoblaze.model.OrderFormData;
 import com.demoblaze.pages.CartPage;
 import com.demoblaze.pages.ProductPage;
 import org.testng.annotations.Test;
@@ -20,7 +21,8 @@ public class OrderTests extends BaseTest{
         HeaderComponent header = productPage.getHeaderComponent();
         CartPage cartPage = header.clickCart();
         PlaceOrderModal placeOrderModal = cartPage.placeAnOrder();
-        ConfirmationModal confirmationModal = placeOrderModal.submitOrderForm("John", "Ukraine", "Kyiv", "4111111111111111", "June", "2025");
+        OrderFormData order = new OrderFormData("John", "Ukraine", "Kyiv", "4111111111111111", "June", "2025");
+        ConfirmationModal confirmationModal = placeOrderModal.submitOrderForm(order);
         String confirmationMessage = confirmationModal.getConfirmationMessage();
         String purchaseDetails = confirmationModal.getPurchaseDetails();
         boolean isIdVisible = purchaseDetails.contains("Id:");

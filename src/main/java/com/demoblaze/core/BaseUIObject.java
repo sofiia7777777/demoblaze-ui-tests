@@ -10,6 +10,9 @@ import java.time.Duration;
 
 public abstract class BaseUIObject {
     protected WebDriver driver;
+    private static final int DEFAULT_TIMEOUT = 5;
+    private static final int FLUENT_WAIT_TIMEOUT = 15;
+    private static final int FLUENT_WAIT_POLLING = 500;
 
     protected BaseUIObject(WebDriver driver) {
         this.driver = driver;
@@ -32,8 +35,13 @@ public abstract class BaseUIObject {
     }
 
 
+
+    private WebDriverWait getWait(int timeoutSeconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+    }
+
     private WebDriverWait getWait() {
-        return new WebDriverWait(driver, Duration.ofSeconds(5));
+        return getWait(DEFAULT_TIMEOUT);
     }
 
     protected WebElement waitForElementToBeVisible(By locator) {
@@ -50,8 +58,8 @@ public abstract class BaseUIObject {
 
     protected WebElement waitForElementToLoad(By locator) {
         Wait<WebDriver> wait = new FluentWait<>(driver)
-                .withTimeout(Duration.ofSeconds(15))
-                .pollingEvery(Duration.ofMillis(500))
+                .withTimeout(Duration.ofSeconds(FLUENT_WAIT_TIMEOUT))
+                .pollingEvery(Duration.ofMillis(FLUENT_WAIT_POLLING))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class);
 

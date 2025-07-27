@@ -22,7 +22,7 @@ public class CartPage extends BasePage {
     }
 
     public PlaceOrderModal placeAnOrder() {
-        By placeOrderButton = By.xpath("//button[text()='Place Order']");
+        By placeOrderButton = By.xpath("//button[normalize-space()='Place Order']");
         click(placeOrderButton);
         return new PlaceOrderModal(driver);
     }
